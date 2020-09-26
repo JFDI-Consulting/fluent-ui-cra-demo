@@ -1,0 +1,98 @@
+.logo {
+    height: 40vmin;
+    pointer-events: none;
+
+    &.medium {
+        height: 20vmin;
+    }
+
+    &.small {
+        height: 10vmin;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+.center {
+    text-align: center;
+}
+.topline {
+    border-top: 1px solid #555;
+    padding-top: 1rem;
+}
+.bottomline {
+    border-bottom: 1px solid #555;
+    padding-bottom: 1rem;
+}
+.spaced {
+    margin: 1rem 0;
+
+    &.widely {
+        margin: 2rem 0;
+    }
+}
+
+.container {
+    max-width: 1024px;
+    margin: auto;
+
+    &.full-height {
+        height: 100vh;
+    }
+
+    &.center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &.zoom-text {
+            font-size: calc(10px + 2vmin);
+        }
+    }
+
+    &.grid.header-middle-footer {
+        display: grid;
+        grid-template-areas:
+            "header header header header header header"
+            "full full full full full full"
+            "footer footer footer footer footer footer";
+        grid-template-rows: 2fr 10fr 1fr;
+        grid-gap: 1rem;
+        padding: 1rem;
+
+        .header {
+            grid-area: header;
+            height: 8rem;
+        }
+        .full {
+            grid-area: full;
+        }
+        .footer {
+            font-size: small;
+            font-weight: 700;
+            grid-area: footer;
+            display: flex;
+            justify-content: space-around;
+            height: 3rem;
+        }
+    }
+}
+
+// make the inner div of PivotItems a flex container - lots more useful
+div[role="toolbar"] > div[role="tabpanel"] > div {
+    display: flex;
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

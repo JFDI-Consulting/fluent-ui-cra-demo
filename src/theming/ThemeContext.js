@@ -42,4 +42,16 @@ const FluentThemedContainer = ({ children }) => {
     return <Fabric applyTheme>{children} </Fabric>;
 };
 
-export { ThemeProvider, useTheme, FluentThemedContainer };
+const useThemeColor = (colorId) => {
+    const [
+        {
+            theme: {
+                palette: { [colorId]: color }
+            }
+        }
+    ] = useTheme();
+
+    return [color];
+};
+
+export { ThemeProvider, useTheme, useThemeColor, FluentThemedContainer };

@@ -1,3 +1,10 @@
+html {
+    height: 100% !important;
+}
+body {
+    min-height: 100% !important;
+}
+
 .logo {
     height: 40vmin;
     pointer-events: none;
@@ -22,17 +29,17 @@
 }
 .topline {
     border-top: 1px solid #555;
-    padding-top: 1rem;
+    padding-top: 16px;
 }
 .bottomline {
     border-bottom: 1px solid #555;
-    padding-bottom: 1rem;
+    padding-bottom: 16px;
 }
 .spaced {
-    margin: 1rem 0;
+    margin: 16px 0;
 
     &.widely {
-        margin: 2rem 0;
+        margin: 32px 0;
     }
 }
 
@@ -41,7 +48,7 @@
     margin: auto;
 
     &.full-height {
-        height: 100vh;
+        // min-height: 100vh;
     }
 
     &.center {
@@ -58,16 +65,17 @@
     &.grid.header-middle-footer {
         display: grid;
         grid-template-areas:
-            "header header header header header header"
-            "full full full full full full"
-            "footer footer footer footer footer footer";
-        grid-template-rows: 2fr 10fr 1fr;
-        grid-gap: 1rem;
-        padding: 1rem;
+            "header"
+            "full"
+            "footer";
+        grid-template-rows: 150px auto 100px;
+        grid-gap: 16px;
+        padding: 16px;
+        min-height: 100vh;
 
         .header {
             grid-area: header;
-            height: 8rem;
+            // height: 8rem;
         }
         .full {
             grid-area: full;
@@ -78,7 +86,7 @@
             grid-area: footer;
             display: flex;
             justify-content: space-around;
-            height: 3rem;
+            // height: 3rem;
         }
     }
 }

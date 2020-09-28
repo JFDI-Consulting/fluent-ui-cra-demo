@@ -4,6 +4,7 @@ import ThemeToggle from "../theming/ThemeToggle";
 import About from "./About";
 import HowTo from "./HowTo";
 import Footer from "./Footer";
+import ToDos from "./ToDos";
 
 export const Main = () => {
     const items = [
@@ -25,6 +26,10 @@ export const Main = () => {
                 </div>
             </header>
             <Pivot className="full">
+                <PivotItem headerText="To Do">
+                    <ToDos />
+                </PivotItem>
+
                 <PivotItem headerText="About">
                     <About />
                 </PivotItem>

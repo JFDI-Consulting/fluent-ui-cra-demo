@@ -47,11 +47,32 @@ const DeleteButton = ({ onClick }) => (
     />
 );
 
+const ConfirmationDialog = ({ shown, title, showDialog, remove }) => (
+    <Dialog
+        hidden={!shown}
+        dialogContentProps={{
+            type: DialogType.normal,
+            title: "Delete",
+            subText:
+                "Are you sure you want to delete this item? This cannot be undone."
+        }}
+        modalProps={{
+            isBlocking: false
+        }}
+    >
+        <DialogFooter>
+            <Label text={title} />
+            <PrimaryButton text="Yes" onClick={remove} />
+            <DefaultButton text="No" onClick={() => showDialog(false)} />
+        </DialogFooter>
+    </Dialog>
+);
+
 function TodoItem({ item: { title, id }, deleteTodo }) {
-    const [openDeleteModal, setOpenModal] = useState(true);
+    const [dialogShown, showDialog] = useState(false);
     const remove = (id) => {
         deleteTodo(id);
-        setOpenModal(true);
+        showDialog(true);
     };
     return (
         <Stack>
@@ -61,28 +82,13 @@ function TodoItem({ item: { title, id }, deleteTodo }) {
                 horizontalAlign="space-between"
             >
                 <Label>{title}</Label>
-                <DeleteButton onClick={() => setOpenModal(!openDeleteModal)} />
+                <DeleteButton onClick={() => showDialog(!dialogShown)} />
             </Stack>
-            <Dialog
-                hidden={openDeleteModal}
-                dialogContentProps={{
-                    type: DialogType.normal,
-                    title: "Delete",
-                    subText:
-                        "Are you sure you want to delete this item? This cannot be undone."
-                }}
-                modalProps={{
-                    isBlocking: false
-                }}
-            >
-                <DialogFooter>
-                    <PrimaryButton text="Yes" onClick={() => remove(id)} />
-                    <DefaultButton
-                        text="No"
-                        onClick={() => setOpenModal(true)}
-                    />
-                </DialogFooter>
-            </Dialog>
+            <ConfirmationDialog
+                shown={dialogShown}
+                remove={() => remove(id)}
+                showDialog={showDialog}
+            />
         </Stack>
     );
 }
@@ -110,10 +116,7 @@ const ToDos = () => {
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/todos?userId=1")
             .then((response) => response.json())
-            .then((obj) => {
-                setData(obj);
-                console.log(obj);
-            });
+            .then((obj) => setData(obj));
     }, []);
 
     const newId = () =>

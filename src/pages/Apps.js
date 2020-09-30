@@ -1,15 +1,22 @@
 import { Nav, Text } from "@fluentui/react";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { dictionaryToObjectArray, firstKey } from "../lib";
 import People from "./People";
 import ToDos from "./ToDos";
 
-const firstKey = (o = {}) => Object.keys(o)[0];
-const dictionaryToObjectArray = (o = {}, fn) => Object.entries(o).map(fn);
-
 const NonexistantApp = ({ app }) => (
     <Text variant="large">
-        The "{app}" app hasn't yet been developed... come back a little later!
+        The "{app}" app hasn't yet been created... come back a little later!
     </Text>
+);
+
+const ContainerWithSidebar = ({ sidebar, content }) => (
+    <div className="container sidebar">
+        {" "}
+        <aside>{sidebar}</aside>
+        <article>{content}</article>
+    </div>
 );
 const Apps = ({ app }) => {
     // A dictionary of apps is transformed into an array of Nav links.
@@ -26,28 +33,32 @@ const Apps = ({ app }) => {
             links
         }
     ];
-    console.log(links);
-    const [currentApp, loadApp] = useState(app || firstKey(apps));
 
-    const linkClicked = (_, link) => loadApp(link.key);
+    const [currentApp, loadApp] = useState(app || firstKey(apps));
+    const history = useHistory();
+
+    const linkClicked = (_, link) => {
+        loadApp(link.key);
+        history.push(`/main/apps/${link.key}`);
+    };
 
     return (
-        <div style={{ marginTop: "2rem", display: "flex" }}>
-            <aside>
+        <ContainerWithSidebar
+            sidebar={
                 <Nav
                     groups={navLinks}
                     selectedKey={currentApp}
                     onLinkClick={linkClicked}
                 ></Nav>
-            </aside>
-            <article>
-                {apps[currentApp] ? (
+            }
+            content={
+                apps[currentApp] ? (
                     apps[currentApp].component
                 ) : (
                     <NonexistantApp app={app} />
-                )}
-            </article>
-        </div>
+                )
+            }
+        />
     );
 };
 

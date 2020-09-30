@@ -3,14 +3,17 @@ import { CommandBar, Pivot, PivotItem } from "@fluentui/react";
 import ThemeToggle from "../theming/ThemeToggle";
 import About from "./About";
 import HowTo from "./HowTo";
+import More from "./More";
 import Footer from "./Footer";
 import Apps from "./Apps";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export const Main = () => {
     const { section = "apps", app } = useParams();
     console.log(section, app);
     const [currentTab, setTab] = useState(section);
+    const history = useHistory();
+
     const items = [
         {
             key: "back",
@@ -19,6 +22,10 @@ export const Main = () => {
             href: "/"
         }
     ];
+    const linkClicked = ({ props: { itemKey } }) => {
+        setTab(itemKey);
+        history.push(`/main/${itemKey}`);
+    };
 
     return (
         <div className="container dark grid full-height header-middle-footer">
@@ -31,11 +38,11 @@ export const Main = () => {
             </header>
             <Pivot
                 defaultSelectedKey={currentTab}
-                onLinkClick={link => setTab(link.itemKey)}
+                onLinkClick={linkClicked}
                 className="full"
             >
-                <PivotItem headerText="Apps">
-                    <Apps itemKey="apps" app={app} />
+                <PivotItem itemKey="apps" headerText="Apps">
+                    <Apps app={app} />
                 </PivotItem>
 
                 <PivotItem itemKey="about" headerText="About">
@@ -45,7 +52,7 @@ export const Main = () => {
                     <HowTo />
                 </PivotItem>
                 <PivotItem itemKey="more" headerText="Further Reading">
-                    <p>Resources I've Found Helpful</p>
+                    <More />
                 </PivotItem>
             </Pivot>
             <Footer />

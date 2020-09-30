@@ -18,8 +18,8 @@ function AddTodo({ onClick }) {
         onClick(text);
         setText("");
     };
-    const checkForEnter = (e) => (e.keyCode === 13 ? addTodo() : null);
-    const textChanged = (e) => setText(e.target.value);
+    const checkForEnter = e => (e.keyCode === 13 ? addTodo() : null);
+    const textChanged = e => setText(e.target.value);
     return (
         <Stack>
             <Stack horizontal>
@@ -70,7 +70,7 @@ const ConfirmationDialog = ({ shown, title, showDialog, remove }) => (
 
 function TodoItem({ item: { title, id }, deleteTodo }) {
     const [dialogShown, showDialog] = useState(false);
-    const remove = (id) => {
+    const remove = id => {
         deleteTodo(id);
         showDialog(true);
     };
@@ -96,7 +96,7 @@ function TodoItem({ item: { title, id }, deleteTodo }) {
 const TodoList = ({ items, deleteTodo }) => (
     <Stack tokens={{ childrenGap: 10 }}>
         {items.length > 0 ? (
-            items.map((item) => (
+            items.map(item => (
                 <TodoItem item={item} key={item.id} deleteTodo={deleteTodo} />
             ))
         ) : (
@@ -115,17 +115,17 @@ const ToDos = () => {
 
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/todos?userId=1")
-            .then((response) => response.json())
-            .then((obj) => setData(obj));
+            .then(response => response.json())
+            .then(obj => setData(obj));
     }, []);
 
     const newId = () =>
         Math.max.apply(
             Math,
-            data.map((o) => o.id)
+            data.map(o => o.id)
         ) + 1;
 
-    const addTodo = (title) => {
+    const addTodo = title => {
         if (title !== "") {
             const id = newId();
             const newTodos = [...data, { id, title }];
@@ -133,8 +133,8 @@ const ToDos = () => {
         }
     };
 
-    const deleteTodo = (id) => {
-        const newTasks = data.filter((todo) => todo.id !== id);
+    const deleteTodo = id => {
+        const newTasks = data.filter(todo => todo.id !== id);
         setData(newTasks);
     };
 
@@ -149,11 +149,7 @@ const ToDos = () => {
                 }}
             >
                 <h3>Todo App using Fluent UI &amp; React</h3>
-                <Stack
-                    horizontalAlign="center"
-                    style={{ width: 600 }}
-                    tokens={{ childrenGap: 25 }}
-                >
+                <Stack style={{ width: 600 }} tokens={{ childrenGap: 25 }}>
                     <AddTodo onClick={addTodo} />
                     <TodoList items={data} deleteTodo={deleteTodo} />
                 </Stack>

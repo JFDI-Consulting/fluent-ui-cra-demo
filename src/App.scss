@@ -5,6 +5,10 @@ body {
     min-height: 100% !important;
 }
 
+ul li {
+    margin-bottom: 1rem;
+}
+
 .logo {
     height: 40vmin;
     pointer-events: none;
@@ -46,6 +50,18 @@ body {
 .container {
     max-width: 1024px;
     margin: auto;
+
+    &.sidebar {
+        margin-top: 2rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 150px auto;
+
+        article {
+            align-self: center;
+            justify-self: center;
+        }
+    }
 
     &.full-height {
         // min-height: 100vh;

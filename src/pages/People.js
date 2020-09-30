@@ -1,19 +1,12 @@
 import { Label, Persona, Spinner, Stack, Text } from "@fluentui/react";
-import React, { useEffect, useState } from "react";
-import { useTheme } from "../theming/ThemeContext";
+import React from "react";
 import { Card, CardItem, CardSection } from "@uifabric/react-cards";
 import useAxios from "axios-hooks";
 
 const People = () => {
-    // const [people, setPeople] = useState([]);
     const [{ data: { results: people = [] } = {}, loading, error }] = useAxios(
         "https://randomuser.me/api/?results=12"
     );
-    const [
-        {
-            theme: { palette }
-        }
-    ] = useTheme();
 
     return (
         <div style={{ textAlign: "center" }}>

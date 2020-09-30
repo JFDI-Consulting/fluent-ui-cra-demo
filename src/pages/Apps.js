@@ -13,11 +13,11 @@ const NonexistantApp = ({ app }) => (
 
 const ContainerWithSidebar = ({ sidebar, content }) => (
     <div className="container sidebar">
-        {" "}
         <aside>{sidebar}</aside>
         <article>{content}</article>
     </div>
 );
+
 const Apps = ({ app }) => {
     // A dictionary of apps is transformed into an array of Nav links.
     const apps = {

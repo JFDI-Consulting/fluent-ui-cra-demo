@@ -2,8 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { themes, list } from "./themes";
 import { Customizations, Fabric } from "@fluentui/react";
-import { Link } from "react-router-dom";
-import LinkFix from "./LinkFix";
+import LinkStylingFix from "./LinkStylingFix";
 
 const getInitialThemeState = () => localStorage.getItem("theme") || list[0];
 
@@ -19,7 +18,7 @@ const useThemeState = () => {
 const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => (
     <ThemeContext.Provider value={useThemeState()}>
-        <LinkFix />
+        <LinkStylingFix />
         {children}
     </ThemeContext.Provider>
 );

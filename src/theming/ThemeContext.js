@@ -7,7 +7,7 @@ const getInitialThemeState = () => localStorage.getItem("theme") || list[0];
 
 const useThemeState = () => {
     const [themeId, setTheme] = useState(getInitialThemeState());
-    const setAndSaveTheme = (theme) => {
+    const setAndSaveTheme = theme => {
         localStorage.setItem("theme", theme);
         setTheme(theme);
     };
@@ -22,8 +22,7 @@ const ThemeProvider = ({ children }) => (
 );
 
 ThemeProvider.propTypes = {
-    children: PropTypes.node.isRequired,
-    initialState: PropTypes.string.isRequired
+    children: PropTypes.node.isRequired
 };
 
 const useTheme = () => useContext(ThemeContext);
@@ -42,7 +41,11 @@ const FluentThemedContainer = ({ children }) => {
     return <Fabric applyTheme>{children} </Fabric>;
 };
 
-const useThemeColor = (colorId) => {
+FluentThemedContainer.propTypes = {
+    children: PropTypes.node.isRequired
+};
+
+const useThemeColor = colorId => {
     const [
         {
             theme: {

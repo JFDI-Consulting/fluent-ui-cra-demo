@@ -1,4 +1,4 @@
-import { Label, Persona, Shimmer, Stack } from "@fluentui/react";
+import { Label, Persona, Stack } from "@fluentui/react";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "../theming/ThemeContext";
 import { Card, CardItem, CardSection } from "@uifabric/react-cards";

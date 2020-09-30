@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { CommandBar, Pivot, PivotItem } from "@fluentui/react";
 import ThemeToggle from "../theming/ThemeToggle";
 import About from "./About";
 import HowTo from "./HowTo";
 import Footer from "./Footer";
 import Apps from "./Apps";
+import { useParams } from "react-router-dom";
 
 export const Main = () => {
+    const { section = "apps", app } = useParams();
+    console.log(section, app);
+    const [currentTab, setTab] = useState(section);
     const items = [
         {
             key: "back",
@@ -25,18 +29,22 @@ export const Main = () => {
                     <ThemeToggle />
                 </div>
             </header>
-            <Pivot className="full">
+            <Pivot
+                defaultSelectedKey={currentTab}
+                onLinkClick={link => setTab(link.itemKey)}
+                className="full"
+            >
                 <PivotItem headerText="Apps">
-                    <Apps />
+                    <Apps itemKey="apps" app={app} />
                 </PivotItem>
 
-                <PivotItem headerText="About">
+                <PivotItem itemKey="about" headerText="About">
                     <About />
                 </PivotItem>
-                <PivotItem headerText="How To">
+                <PivotItem itemKey="howto" headerText="How To">
                     <HowTo />
                 </PivotItem>
-                <PivotItem headerText="Further Reading">
+                <PivotItem itemKey="more" headerText="Further Reading">
                     <p>Resources I've Found Helpful</p>
                 </PivotItem>
             </Pivot>

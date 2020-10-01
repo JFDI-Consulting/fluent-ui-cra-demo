@@ -1,22 +1,10 @@
-import { Nav, Text } from "@fluentui/react";
+import { MessageBar, MessageBarType, Nav, Text } from "@fluentui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import ContainerWithSidebar from "../components/ContainerWithSidebar";
 import { dictionaryToObjectArray, firstKey } from "../lib";
 import People from "./People";
 import ToDos from "./ToDos";
-
-const NonexistantApp = ({ app }) => (
-    <Text variant="large">
-        The "{app}" app hasn't yet been created... come back a little later!
-    </Text>
-);
-
-const ContainerWithSidebar = ({ sidebar, content }) => (
-    <div className="container sidebar">
-        <aside>{sidebar}</aside>
-        <article>{content}</article>
-    </div>
-);
 
 const Apps = ({ app }) => {
     // A dictionary of apps is transformed into an array of Nav links.
@@ -55,7 +43,14 @@ const Apps = ({ app }) => {
                 apps[currentApp] ? (
                     apps[currentApp].component
                 ) : (
-                    <NonexistantApp app={app} />
+                    <MessageBar
+                        messageBarType={MessageBarType.info}
+                        isMultiline={false}
+                        dismissButtonAriaLabel="Close"
+                    >
+                        The "{app}" app hasn't yet been created... come back a
+                        little later!
+                    </MessageBar>
                 )
             }
         />

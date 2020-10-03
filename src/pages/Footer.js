@@ -1,11 +1,5 @@
 import React from "react";
-import { Link } from "@fluentui/react";
-
-const ExternalLink = ({ href, text }) => (
-    <Link href={href} target="_blank">
-        {text}
-    </Link>
-);
+import ExternalLink from "../components/ExternalLink";
 
 const Footer = () => {
     return (
@@ -18,7 +12,7 @@ const Footer = () => {
                 />
             </p>
             <p>
-                Copyright {new Date().getFullYear()} &copy;{" "}
+                Copyright {new Date().getFullYear()} &copy;
                 <ExternalLink
                     href="https://jfdi.info"
                     text="JFDI Consulting Ltd"

@@ -8,9 +8,8 @@ import Footer from "./Footer";
 import Apps from "./Apps";
 import { useHistory, useParams } from "react-router-dom";
 
-export const Main = () => {
+export const AppContainer = () => {
     const { section = "apps", app } = useParams();
-    console.log(section, app);
     const [currentTab, setTab] = useState(section);
     const history = useHistory();
 

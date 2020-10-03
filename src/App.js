@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FluentThemedContainer, ThemeProvider } from "./theming/ThemeContext";
 import "./App.scss";
 import { initializeIcons } from "@fluentui/react";
-import { Main } from "./pages/Main";
+import { AppContainer } from "./pages/AppContainer";
 import { Front } from "./pages/Front";
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
                     <Switch>
                         <Route
                             path="/main/:section?/:app?"
-                            children={<Main />}
+                            children={<AppContainer />}
                         />
                         <Route path="/">
                             <Front />

@@ -1,4 +1,4 @@
-import { MessageBar, MessageBarType, Nav, Text } from "@fluentui/react";
+import { MessageBar, MessageBarType, Nav } from "@fluentui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ContainerWithSidebar from "../components/ContainerWithSidebar";

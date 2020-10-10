@@ -27,9 +27,9 @@ const ContainerWithSidebar = ({ sidebar, content, fluid = false }) => {
 };
 
 ContainerWithSidebar.propTypes = {
-    sidebar: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
-    fluid: PropTypes.bool.isRequired
+    sidebar: PropTypes.oneOfType([PropTypes.elementType, PropTypes.object]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.elementType, PropTypes.object]).isRequired,
+    fluid: PropTypes.bool
 };
 
 export default ContainerWithSidebar;

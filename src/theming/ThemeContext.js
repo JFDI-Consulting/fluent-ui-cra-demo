@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { themes, list } from "./themes";
-import { Customizations, Fabric } from "@fluentui/react";
+import { Fabric, loadTheme } from "@fluentui/react";
 import LinkStylingFix from "./LinkStylingFix";
 
 const getInitialThemeState = () => localStorage.getItem("theme") || list[0];
@@ -33,10 +33,7 @@ const FluentThemedContainer = ({ children }) => {
     const [{ theme }] = useTheme();
 
     useEffect(
-        () =>
-            Customizations.applySettings({
-                theme
-            }),
+        () => { loadTheme(theme) },
         [theme]
     );
 
